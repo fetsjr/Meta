@@ -1,0 +1,26 @@
+{
+    "name": "foxted/meta",
+    "description": "Small package to generate meta tags easily in your Laravel app",
+    "license": "MIT",
+    "require": {
+        "illuminate/support": "4.2.*",
+        "illuminate/view": "4.2.*",
+        "illuminate/html": "4.2.*"
+    },
+    "require-dev": {
+        "codeception/codeception": "*@dev",
+        "codeception/mockery-module": "*@dev"
+    },
+    "authors": [
+        {
+            "name": "Valentin PRUGNAUD",
+            "email": "valentin@whatdafox.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Foxted\\Meta": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}

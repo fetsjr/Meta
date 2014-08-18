@@ -37,20 +37,20 @@ class MetaTest extends \Codeception\TestCase\Test
         $this->assertInstanceOf('Foxted\Meta\Meta', $meta);
     }
 
-//    /** @test */
-//    public function it_can_have_a_node()
-//    {
-//        $breadcrumb = new Breadcrumb( $this->viewFactory );
-//        $this->assertAttributeCount(0, 'links', $breadcrumb);
-//        $this->assertAttributeInternalType('array', 'links', $breadcrumb);
-//
-//        $breadcrumb->add('Home');
-//        $this->assertAttributeCount(1, 'links', $breadcrumb);
-//        $this->assertAttributeInternalType('array', 'links', $breadcrumb);
-//
-//        $links = $breadcrumb->getLinks();
-//        $this->assertInstanceOf('Foxted\Breadcrumb\BreadcrumbNode', $links[0]);
-//    }
+    /** @test */
+    public function it_can_have_a_tag()
+    {
+        $breadcrumb = new Breadcrumb( $this->viewFactory );
+        $this->assertAttributeCount(0, 'links', $breadcrumb);
+        $this->assertAttributeInternalType('array', 'links', $breadcrumb);
+
+        $breadcrumb->add('Home');
+        $this->assertAttributeCount(1, 'links', $breadcrumb);
+        $this->assertAttributeInternalType('array', 'links', $breadcrumb);
+
+        $links = $breadcrumb->getLinks();
+        $this->assertInstanceOf('Foxted\Breadcrumb\BreadcrumbNode', $links[0]);
+    }
 //
 //    /** @test */
 //    public function it_can_have_multiple_nodes()
@@ -104,10 +104,7 @@ class MetaTest extends \Codeception\TestCase\Test
     private function mockHtmlBuilder()
     {
         $this->htmlBuilder = $this->htmlBuilder = $this->getMock('Illuminate\Html\HtmlBuilder', ['attributes'], [
-            $this->getMock('Illuminate\Routing\UrlGenerator', NULL, [
-                $this->getMock('Illuminate\Routing\RouteCollection'),
-                $this->getMock('Symfony\Component\HttpFoundation\Request')
-            ])
+            $this->getMock('Illuminate\Routing\UrlGenerator')
         ]);
     }
 

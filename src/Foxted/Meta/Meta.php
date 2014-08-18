@@ -32,7 +32,7 @@ class Meta
      * Array that contains all the meta
      * @var array
      */
-    protected $metas = [];
+    protected $tags = [];
 
     /**
      * Constructor
@@ -80,7 +80,7 @@ class Meta
     public function render()
     {
         return $this->viewFactory->make('meta::meta', [
-            'metas' => $this->getMetas()
+            'metas' => $this->getTags()
         ]);
     }
 
@@ -88,9 +88,9 @@ class Meta
      * Get metas array
      * @return mixed
      */
-    public function getMetas()
+    public function getTags()
     {
-        return $this->metas;
+        return $this->tags;
     }
 
 }

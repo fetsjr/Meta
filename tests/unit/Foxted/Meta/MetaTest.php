@@ -15,6 +15,7 @@ class MetaTest extends \Codeception\TestCase\Test
     protected $view;
     protected $htmlBuilder;
     protected $bladeCompiler;
+    protected $configRepository;
 
     /**
      * Constructor
@@ -23,24 +24,22 @@ class MetaTest extends \Codeception\TestCase\Test
     {
         $this->mockViewFactory();
         $this->mockView();
-        $this->viewFactory->expects($this->any())
-            ->method("make")
-            ->will($this->returnValue($this->view));
         $this->mockHtmlBuilder();
         $this->mockBladeCompiler();
+        $this->mockConfigCompiler();
     }
 
     /** @test */
     public function it_is_initializable()
     {
-        $meta = new Meta( $this->viewFactory, $this->htmlBuilder, $this->bladeCompiler );
+        $meta = $this->createInstance();
         $this->assertInstanceOf('Foxted\Meta\Meta', $meta);
     }
 
     /** @test */
     public function it_can_have_a_title_tag()
     {
-        $metas = new Meta( $this->viewFactory, $this->htmlBuilder, $this->bladeCompiler );
+        $metas = $this->createInstance();
         $this->assertAttributeCount(0, 'tags', $metas);
         $this->assertAttributeInternalType('array', 'tags', $metas);
 
@@ -55,7 +54,7 @@ class MetaTest extends \Codeception\TestCase\Test
     /** @test */
     public function it_can_have_a_meta_name_tag()
     {
-        $metas = new Meta( $this->viewFactory, $this->htmlBuilder, $this->bladeCompiler );
+        $metas = $this->createInstance();
         $this->assertAttributeCount(0, 'tags', $metas);
         $this->assertAttributeInternalType('array', 'tags', $metas);
 
@@ -74,7 +73,7 @@ class MetaTest extends \Codeception\TestCase\Test
     /** @test */
     public function it_can_have_a_meta_http_equiv_tag()
     {
-        $metas = new Meta( $this->viewFactory, $this->htmlBuilder, $this->bladeCompiler );
+        $metas = $this->createInstance();
         $this->assertAttributeCount(0, 'tags', $metas);
         $this->assertAttributeInternalType('array', 'tags', $metas);
 
@@ -93,7 +92,7 @@ class MetaTest extends \Codeception\TestCase\Test
     /** @test */
     public function it_can_have_multiple_tags()
     {
-        $metas = new Meta( $this->viewFactory, $this->htmlBuilder, $this->bladeCompiler );
+        $metas = $this->createInstance();
         $this->assertAttributeCount(0, 'tags', $metas);
 
         $metas->title('My amazing website');
@@ -105,10 +104,19 @@ class MetaTest extends \Codeception\TestCase\Test
     /** @test */
     public function it_can_render_the_view()
     {
-        $metas = new Meta( $this->viewFactory, $this->htmlBuilder, $this->bladeCompiler );
+        $metas = $this->createInstance();
         $metas->title('My amazing website');
         $view = $metas->render();
         $this->assertInstanceOf('Illuminate\View\View', $view);
+    }
+
+    /**
+     * Create an instance of the Meta class
+     * @return Meta
+     */
+    private function createInstance()
+    {
+        return new Meta( $this->viewFactory, $this->htmlBuilder, $this->bladeCompiler, $this->configRepository );
     }
 
     /**
@@ -121,6 +129,7 @@ class MetaTest extends \Codeception\TestCase\Test
             $this->getMock('Illuminate\View\ViewFinderInterface'),
             $this->getMock('Illuminate\Events\Dispatcher')
         ]);
+
     }
 
     /**
@@ -134,6 +143,9 @@ class MetaTest extends \Codeception\TestCase\Test
             'view',
             'path'
         ]);
+        $this->viewFactory->expects($this->any())
+                          ->method("make")
+                          ->will($this->returnValue($this->view));
     }
 
     /**
@@ -156,5 +168,22 @@ class MetaTest extends \Codeception\TestCase\Test
             ''
         ]);
     }
+
+    /**
+     * Mock Config repository
+     */
+    private function mockConfigCompiler()
+    {
+        $loader = $this->getMock('Illuminate\Config\LoaderInterface');
+        $loader->expects($this->any())->method('load')->will($this->returnValue($this->view));
+        $this->configRepository = $this->getMock('Illuminate\Config\Repository', NULL, [
+            $loader,
+            'testing'
+        ]);
+        $this->configRepository->expects($this->any())
+                               ->method('get')
+                               ->will($this->returnValue('Default value'));
+    }
+
 
 }

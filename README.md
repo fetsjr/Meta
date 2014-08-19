@@ -34,10 +34,23 @@ Add a facade alias to this same file at the bottom:
 ];
 ```
 
-And finally publish the view:
+And finally publish the view & config files:
 
 ```
 php artisan view:publish foxted/meta
+php artisan config:publish foxted/meta
+```
+
+## Defaults
+
+Defaults values are set in the config file, to override them, after you ran the `php artisan config:publish foxted/meta` command, navigate to `app/config/packages/foxted/config.php` and change the values as you want.
+
+You can also delete them entirely if you do not want any defaults values, just be sure to keep the `app/config/packages/foxted/config.php` file and return an empty array, like so:
+
+```php
+<?php
+
+return [];
 ```
 
 ## Usage
@@ -60,6 +73,7 @@ To show your meta block in your view, just use the following Blade directive:
 ```
 @meta
 ```
+
 
 ## Contribution
 

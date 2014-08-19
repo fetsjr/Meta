@@ -6,7 +6,8 @@
     "require": {
         "illuminate/support": "4.2.*",
         "illuminate/view": "4.2.*",
-        "illuminate/html": "4.2.*"
+        "illuminate/html": "4.2.*",
+        "illuminate/config": "4.2.*"
     },
     "require-dev": {
         "codeception/codeception": "*@dev",

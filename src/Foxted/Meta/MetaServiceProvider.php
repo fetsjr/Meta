@@ -19,7 +19,7 @@ class MetaServiceProvider extends ServiceProvider
     {
         $this->app->bind('meta', function ( $app )
         {
-            return new Meta($app['view'], $app['html'], $app['blade.compiler']);
+            return new Meta($app['view'], $app['html'], $app['blade.compiler'], $app['config']);
         });
 
     }

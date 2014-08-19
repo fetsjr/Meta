@@ -38,40 +38,78 @@ class MetaTest extends \Codeception\TestCase\Test
     }
 
     /** @test */
-    public function it_can_have_a_tag()
+    public function it_can_have_a_title_tag()
     {
-        $breadcrumb = new Breadcrumb( $this->viewFactory );
-        $this->assertAttributeCount(0, 'links', $breadcrumb);
-        $this->assertAttributeInternalType('array', 'links', $breadcrumb);
+        $metas = new Meta( $this->viewFactory, $this->htmlBuilder, $this->bladeCompiler );
+        $this->assertAttributeCount(0, 'tags', $metas);
+        $this->assertAttributeInternalType('array', 'tags', $metas);
 
-        $breadcrumb->add('Home');
-        $this->assertAttributeCount(1, 'links', $breadcrumb);
-        $this->assertAttributeInternalType('array', 'links', $breadcrumb);
-
-        $links = $breadcrumb->getLinks();
-        $this->assertInstanceOf('Foxted\Breadcrumb\BreadcrumbNode', $links[0]);
+        $metas->title('My amazing website');
+        $this->assertAttributeCount(1, 'tags', $metas);
+        $this->assertAttributeInternalType('array', 'tags', $metas);
+        $this->assertEquals($metas->getTags()[0]['type'], 'paired');
+        $this->assertEquals($metas->getTags()[0]['tag'], 'title');
+        $this->assertEquals($metas->getTags()[0]['content'], 'My amazing website');
     }
-//
-//    /** @test */
-//    public function it_can_have_multiple_nodes()
-//    {
-//        $breadcrumb = new Breadcrumb( $this->viewFactory );
-//        $this->assertAttributeCount(0, 'links', $breadcrumb);
-//
-//        $breadcrumb->add('Home');
-//        $breadcrumb->add('Second link');
-//        $breadcrumb->add('Third link');
-//        $this->assertAttributeCount(3, 'links', $breadcrumb);
-//    }
-//
-//    /** @test */
-//    public function it_can_render_the_view()
-//    {
-//        $breadcrumb = new Breadcrumb( $this->viewFactory );
-//        $breadcrumb->add('Home');
-//        $view = $breadcrumb->render();
-//        $this->assertInstanceOf('Illuminate\View\View', $view);
-//    }
+
+    /** @test */
+    public function it_can_have_a_meta_name_tag()
+    {
+        $metas = new Meta( $this->viewFactory, $this->htmlBuilder, $this->bladeCompiler );
+        $this->assertAttributeCount(0, 'tags', $metas);
+        $this->assertAttributeInternalType('array', 'tags', $metas);
+
+        $this->htmlBuilder->expects($this->any())
+                          ->method("attributes")
+                          ->will($this->returnValue('name="keywords" content="amazing, awesome"'));
+
+        $metas->name('keywords', 'amazing, awesome');
+        $this->assertAttributeCount(1, 'tags', $metas);
+        $this->assertAttributeInternalType('array', 'tags', $metas);
+        $this->assertEquals($metas->getTags()[0]['type'], 'unpaired');
+        $this->assertEquals($metas->getTags()[0]['tag'], 'meta');
+        $this->assertEquals($metas->getTags()[0]['attributes'], 'name="keywords" content="amazing, awesome"');
+    }
+
+    /** @test */
+    public function it_can_have_a_meta_http_equiv_tag()
+    {
+        $metas = new Meta( $this->viewFactory, $this->htmlBuilder, $this->bladeCompiler );
+        $this->assertAttributeCount(0, 'tags', $metas);
+        $this->assertAttributeInternalType('array', 'tags', $metas);
+
+        $this->htmlBuilder->expects($this->any())
+                          ->method("attributes")
+                          ->will($this->returnValue('http-equiv="refresh" content="30"'));
+
+        $metas->equiv('refresh', 30);
+        $this->assertAttributeCount(1, 'tags', $metas);
+        $this->assertAttributeInternalType('array', 'tags', $metas);
+        $this->assertEquals($metas->getTags()[0]['type'], 'unpaired');
+        $this->assertEquals($metas->getTags()[0]['tag'], 'equiv');
+        $this->assertEquals($metas->getTags()[0]['attributes'], 'http-equiv="refresh" content="30"');
+    }
+
+    /** @test */
+    public function it_can_have_multiple_tags()
+    {
+        $metas = new Meta( $this->viewFactory, $this->htmlBuilder, $this->bladeCompiler );
+        $this->assertAttributeCount(0, 'tags', $metas);
+
+        $metas->title('My amazing website');
+        $metas->name('keywords', 'amazing, awesome');
+        $metas->equiv('refresh', 30);
+        $this->assertAttributeCount(3, 'tags', $metas);
+    }
+
+    /** @test */
+    public function it_can_render_the_view()
+    {
+        $metas = new Meta( $this->viewFactory, $this->htmlBuilder, $this->bladeCompiler );
+        $metas->title('My amazing website');
+        $view = $metas->render();
+        $this->assertInstanceOf('Illuminate\View\View', $view);
+    }
 
     /**
      * Mock Laravel view factory

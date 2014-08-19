@@ -1,7 +1,7 @@
 {
     "name": "foxted/meta",
     "description": "Small package to generate meta tags easily in your Laravel app",
-    "keywords":"laravel, seo, meta, tags, html, builder",
+    "keywords":[ "laravel", "seo", "meta", "tags", "html", "builder" ],
     "license": "MIT",
     "require": {
         "illuminate/support": "4.2.*",

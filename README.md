@@ -38,7 +38,24 @@ php artisan view:publish foxted/meta
 
 ## Usage
 
-In progress
+Within your controllers, before rendering your view, generate your tags:
+
+```php
+public function index()
+{
+    Meta::title("My amazing website"); // <title>My amazing website</title>
+    Meta::name("keywords", "awesome, keywords"); // <meta name="keywords" content="awesome, keywords">
+    Meta::name("description", "The best website you've ever seen"); // <meta name="description" content="The best website you've ever seen">
+    Meta::equiv("content-type", "text/html; charset=UTF-8"); // <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    return View::make("index");
+}
+```
+
+To show your meta block in your view, just use the following Blade directive:
+
+```
+@meta
+```
 
 ## Contribution
 

@@ -1,5 +1,6 @@
 <?php namespace Foxted\Meta;
 
+use Foxted\Meta\Facades\MetaFacade;
 use Illuminate\Html\HtmlBuilder;
 use Illuminate\View\Compilers\BladeCompiler;
 use Illuminate\View\Factory;
@@ -48,15 +49,33 @@ class Meta
     }
 
     /**
-     * Generate a tag
+     * Generate a HTML unpaired tag
      * @param $tagName
      * @param $tagAttributes
      * @return array
      */
-    private function tag($tagName, $tagAttributes)
+    private function unpairedTag($tagName, $tagAttributes)
     {
         return [
+            'type' => MetaFacade::UNPAIRED_TAG,
             'tag' => $tagName,
+            'attributes' => $this->htmlBuilder->attributes($tagAttributes)
+        ];
+    }
+
+    /**
+     * Generate a self-closing tag
+     * @param       $tagName
+     * @param       $tagContent
+     * @param array $tagAttributes
+     * @return array
+     */
+    public function pairedTag($tagName, $tagContent, $tagAttributes = [])
+    {
+        return [
+            'type' => MetaFacade::PAIRED_TAG,
+            'tag' => $tagName,
+            'content' => $tagContent,
             'attributes' => $this->htmlBuilder->attributes($tagAttributes)
         ];
     }
@@ -66,10 +85,33 @@ class Meta
      * @param $name
      * @param $content
      */
-    public function meta( $name, $content )
+    public function name( $name, $content )
     {
         $attributes = compact('name', 'content');
-        array_push($this->metas, $this->tag('meta', $attributes));
+        array_push($this->tags, $this->unpairedTag('meta', $attributes));
+    }
+
+    /**
+     * Build a http-equiv meta tag
+     * @param $http_equiv
+     * @param $content
+     */
+    public function equiv( $http_equiv, $content )
+    {
+        $attributes = [
+            'http-equiv' => $http_equiv,
+            'content' => $content
+        ];
+        array_push($this->tags, $this->unpairedTag('equiv', $attributes));
+    }
+
+    /**
+     * Build a title tag
+     * @param $title
+     */
+    public function title( $title )
+    {
+        array_push($this->tags, $this->pairedTag('title', $title));
     }
 
     /**

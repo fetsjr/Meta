@@ -1,9 +1,9 @@
 @foreach($metas as $meta)
-    @if($meta['tag'] == 'meta' || $meta['tag'] == 'equiv')
+    @if($meta['type'] == Meta::UNPAIRED_TAG)
         <meta {{ $meta['attributes'] }}>
     @endif
 
-    @if($meta['tag'] == 'title')
-        <title>{{ $meta['attributes'] }}</title>
+    @if($meta['type'] == Meta::PAIRED_TAG)
+        <title {{ $meta['attributes'] }}>{{ $meta['content'] }}</title>
     @endif
 @endforeach

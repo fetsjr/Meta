@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Facade;
 class MetaFacade extends Facade
 {
 
+    const PAIRED_TAG = 'paired';
+    const UNPAIRED_TAG = 'unpaired';
+
     /**
      * Get facade accessor
      *

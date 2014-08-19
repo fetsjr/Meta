@@ -1,6 +1,10 @@
 # Meta
 
-[IN PROGRESS]
+
+[![Latest Stable Version](https://poser.pugx.org/foxted/meta/v/stable.svg)](https://packagist.org/packages/foxted/meta)
+[![Total Downloads](https://poser.pugx.org/foxted/meta/downloads.svg)](https://packagist.org/packages/foxted/meta)
+[![Latest Unstable Version](https://poser.pugx.org/foxted/meta/v/unstable.svg)](https://packagist.org/packages/foxted/meta)
+[![License](https://poser.pugx.org/foxted/meta/license.svg)](https://packagist.org/packages/foxted/meta)
 
 Small package to generate meta tags easily in your Laravel app
 

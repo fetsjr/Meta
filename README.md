@@ -14,7 +14,7 @@ First, pull in the package through Composer.
 
 ```js
 "require": {
-    "foxted/meta": "~1.0"
+    "foxted/meta": "1.1.*"
 }
 ```
 

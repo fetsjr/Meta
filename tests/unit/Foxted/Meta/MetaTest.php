@@ -127,7 +127,7 @@ class MetaTest extends \Codeception\TestCase\Test
         $this->viewFactory = $this->getMock('Illuminate\View\Factory', ['make'], [
             $this->getMock('Illuminate\View\Engines\EngineResolver'),
             $this->getMock('Illuminate\View\ViewFinderInterface'),
-            $this->getMock('Illuminate\Events\Dispatcher')
+            $this->getMock('Illuminate\Contracts\Events\Dispatcher')
         ]);
 
     }

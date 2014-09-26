@@ -4,10 +4,10 @@
     "keywords":[ "laravel", "seo", "meta", "tags", "html", "builder" ],
     "license": "MIT",
     "require": {
-        "illuminate/support": "4.2.*",
-        "illuminate/view": "4.2.*",
-        "illuminate/html": "4.2.*",
-        "illuminate/config": "4.2.*"
+        "illuminate/support": "5.0.*",
+        "illuminate/view": "5.0.*",
+        "illuminate/html": "5.0.*",
+        "illuminate/config": "5.0.*"
     },
     "require-dev": {
         "codeception/codeception": "*@dev",
@@ -24,5 +24,5 @@
             "Foxted\\Meta": "src/"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "dev"
 }

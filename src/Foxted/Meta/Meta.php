@@ -1,10 +1,10 @@
 <?php namespace Foxted\Meta;
 
 use Foxted\Meta\Facades\MetaFacade;
-use Illuminate\Config\Repository;
+use Illuminate\Contracts\Config\Repository;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Html\HtmlBuilder;
 use Illuminate\View\Compilers\BladeCompiler;
-use Illuminate\View\Factory;
 
 /**
  * Class Meta
@@ -17,7 +17,7 @@ class Meta
 {
 
     /**
-     * @var \Illuminate\View\Factory
+     * @var \Illuminate\Contracts\View\Factory
      */
     protected $viewFactory;
 
@@ -31,9 +31,9 @@ class Meta
      */
     protected $bladeCompiler;
 
-    /**
-     * @var \Illuminate\Config\Repository
-     */
+	/**
+	 * @var \Illuminate\Contracts\Config\Repository
+	 */
     protected $config;
 
     /**
@@ -46,13 +46,13 @@ class Meta
      */
     protected $defaults = [];
 
-    /**
-     * Constructor
-     * @param Factory                       $viewFactory
-     * @param HtmlBuilder                   $htmlBuilder
-     * @param BladeCompiler                 $bladeCompiler
-     * @param \Illuminate\Config\Repository $config
-     */
+	/**
+	 * Constructor
+	 * @param Factory       $viewFactory
+	 * @param HtmlBuilder   $htmlBuilder
+	 * @param BladeCompiler $bladeCompiler
+	 * @param Repository    $config
+	 */
     public function __construct( Factory $viewFactory, HtmlBuilder $htmlBuilder, BladeCompiler $bladeCompiler, Repository $config )
     {
         $this->viewFactory = $viewFactory;

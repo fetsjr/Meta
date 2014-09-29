@@ -17,6 +17,8 @@ class MetaServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        if(!isset($app['html'])) $this->registerHtmlBuilder();
+        
         $this->app->bind('meta', function ( $app )
         {
             return new Meta($app['view'], $app['html'], $app['blade.compiler'], $app['config']);
@@ -40,6 +42,19 @@ class MetaServiceProvider extends ServiceProvider
     public function provides()
     {
         return array('meta');
+    }
+
+    /**
+     * Register the HTML builder instance.
+     *
+     * @return void
+     */
+    protected function registerHtmlBuilder()
+    {
+        $this->app->bindShared('html', function($app)
+        {
+            return new \Illuminate\Html\HtmlBuilder($app['url']);
+        });
     }
 
 }

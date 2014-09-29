@@ -17,7 +17,7 @@ class MetaServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if(!isset($app['html'])) $this->registerHtmlBuilder();
+        $this->registerHtmlBuilder();
         
         $this->app->bind('meta', function ( $app )
         {
@@ -51,10 +51,13 @@ class MetaServiceProvider extends ServiceProvider
      */
     protected function registerHtmlBuilder()
     {
-        $this->app->bindShared('html', function($app)
+        if(!isset($app['html']))
         {
-            return new \Illuminate\Html\HtmlBuilder($app['url']);
-        });
+            $this->app->bindShared('html', function($app)
+            {
+                return new \Illuminate\Html\HtmlBuilder($app['url']);
+            });
+        }
     }
 
 }

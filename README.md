@@ -30,7 +30,7 @@ Add a facade alias to this same file at the bottom:
 
 ```php
 'aliases' => [
-    'Meta' => 'Foxted\Meta\Facades\Meta'
+    'Meta' => 'Foxted\Meta\Facades\MetaFacade'
 ];
 ```
 

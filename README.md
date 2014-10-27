@@ -12,9 +12,19 @@ Small package to generate meta tags easily in your Laravel app
 
 First, pull in the package through Composer.
 
+### Laravel 4.2
+
 ```js
 "require": {
-    "foxted/meta": "1.1.*"
+    "foxted/meta": "~1.0"
+}
+```
+
+### Laravel 5.0
+
+```js
+"require": {
+    "foxted/meta":"1.1.*"
 }
 ```
 

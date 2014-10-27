@@ -4,10 +4,11 @@
     "keywords":[ "laravel", "seo", "meta", "tags", "html", "builder" ],
     "license": "MIT",
     "require": {
-        "illuminate/support": ">=4.2",
-        "illuminate/view": ">=4.2",
-        "illuminate/html": ">=4.2",
-        "illuminate/config": ">=4.2"
+        "illuminate/support": "5.*",
+        "illuminate/view": "5.*",
+        "illuminate/html": "5.*",
+        "illuminate/config": "5.*",
+        "illuminate/contracts":"5.*"
     },
     "require-dev": {
         "codeception/codeception": "*@dev",

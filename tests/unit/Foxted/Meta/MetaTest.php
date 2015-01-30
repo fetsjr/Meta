@@ -174,12 +174,7 @@ class MetaTest extends \Codeception\TestCase\Test
      */
     private function mockConfigCompiler()
     {
-        $loader = $this->getMock('Illuminate\Config\LoaderInterface');
-        $loader->expects($this->any())->method('load')->will($this->returnValue($this->view));
-        $this->configRepository = $this->getMock('Illuminate\Config\Repository', NULL, [
-            $loader,
-            'testing'
-        ]);
+        $this->configRepository = $this->getMock('Illuminate\Config\Repository');
         $this->configRepository->expects($this->any())
                                ->method('get')
                                ->will($this->returnValue('Default value'));

@@ -124,7 +124,7 @@ class Meta
     private function setDefaults()
     {
 
-        if($this->config->hasGroup('meta::defaults'))
+        if($this->config->has('meta::defaults'))
         {
             if($this->config->has('meta::defaults.title')) array_push($this->defaults, $this->pairedTag('title', $this->config->get('meta::defaults.title')));
             if($this->config->has('meta::defaults.keywords')) array_push($this->defaults, $this->unpairedTag('meta', [

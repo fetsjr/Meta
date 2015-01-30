@@ -6,7 +6,7 @@
     "require": {
         "illuminate/support": "~5.0",
         "illuminate/view": "~5.0",
-        "illuminate/html": "~5.0",
+        "illuminate/html": "dev-master",
         "illuminate/config": "~5.0",
         "illuminate/contracts":"~5.0"
     },

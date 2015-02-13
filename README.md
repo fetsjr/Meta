@@ -1,4 +1,4 @@
-# Meta
+# Meta /!\ DEPRECATED /!\
 
 [![Build Status](https://travis-ci.org/foxted/Meta.svg?branch=master)](https://travis-ci.org/foxted/Meta)
 [![Latest Stable Version](https://poser.pugx.org/foxted/meta/v/stable.svg)](https://packagist.org/packages/foxted/meta)
